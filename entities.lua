@@ -26,7 +26,7 @@ function entdata.EntGraphics()
 	entBluk0 = bgui.Image( "graphics/entBluk0.png" )
 end
 
-function entdata.Register( id, name, sname, graphic, etype, colour, health, damage, spawn, think, kill )
+function entdata.Register( id, name, sname, graphic, etype, colour, health, damage, genEnt, onSpawn, think, kill )
 	local t = {
 		id = id,
 		name = name,
@@ -36,7 +36,8 @@ function entdata.Register( id, name, sname, graphic, etype, colour, health, dama
 		collour = colour,
 		health = health,
 		damage = damage,
-		spawn = spawn,
+		genEnt = genEnt,
+		onSpawn = onSpawn,
 		think = think,
 		kill = kill
 	}
@@ -51,7 +52,7 @@ function entdata.spawnEnt( enttable, x, y, health, uid )
 		pos = { x = x, y = y },
 		health = health
 	}
-	t.et.spawn( uid, t )
+	t.et.onSpawn( uid, t )
 	activeEnts[ uid ] = t
 	activeEntCount = activeEntCount + 1
 	print( "Spawned " .. enttable.name .. " at " .. x .. ", " .. y )

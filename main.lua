@@ -13,6 +13,8 @@ function love.load()
 	square20 = bgui.Image( "graphics/square20.png" )
 	square30 = bgui.Image( "graphics/square30.png" )
 	entdata.Register( 0, "plrWpB0", "Bullet", square10, "wep", { 255, 255, 255 }, 0, 0,
+	function( s )
+	end,
 	function( i, self ) -- Spawn
 	end,
 	function( i, self ) -- Think
@@ -20,6 +22,16 @@ function love.load()
 		if self.pos.y < 0 then
 			self.et.kill( i, self )
 		end
+	end,
+	function( i, self ) -- Kill
+		activeEnts[ i ] = nil
+	end )
+	entdata.Register( 1, "wEnem1", "Enemy", square20, "enm", { 255, 0, 0 }, 10, 0,
+	function( s )
+	end,
+	function( i, self ) -- Spawn
+	end,
+	function( i, self ) -- Think
 	end,
 	function( i, self ) -- Kill
 		activeEnts[ i ] = nil
