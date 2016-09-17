@@ -13,7 +13,7 @@ player.pos = {
 player.inv = {}
 
 function player.Draw()
-	bgui.img( nPlr, player.pos[ "x" ], player.pos[ "y" ], { 255, 255, 255 } )
+	bgui.img( nPlr, player.pos.x, player.pos.y, { 255, 255, 255 } )
 end
 
 function player.PlayerGraphics()

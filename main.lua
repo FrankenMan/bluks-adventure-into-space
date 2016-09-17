@@ -11,30 +11,40 @@ function love.load()
 	player.PlayerGraphics()
 	ents.Spawn()
 	selectBox = bgui.Image( "graphics/selectBox.png" )
+	square10 = bgui.Image( "graphics/square10.png" )
+	square20 = bgui.Image( "graphics/square20.png" )
+	square30 = bgui.Image( "graphics/square30.png" )
+	entdata.Register( 0, "plrWpB0", "Bullet", square10, "wep", { 255, 255, 255 }, 0, 0, function( self )
+		self.pos.y = self.pos.y - 1.5
+	end	)
 end
 
 function love.update()
 	width, height = bgui.Dimensions()
 	mousex, mousey = game.mousePos()
 	player.Control()
+	ents.Think()
 end
 
 function love.draw()
 	love.graphics.push()
 	love.graphics.rotate( 0 )
 	love.graphics.scale( 1.25 )
-	--love.graphics.translate( ( width - player.pos[ "x" ] ) - ( 475 / 0.85 ), -50 )
 	player.Draw()
 	ents.Draw()
 	love.graphics.pop()
 	player.HUD()
 end
 
-function love.mouse.mousepressed( x, y, button, isTouch )
+function love.mousepressed( x, y, button, isTouch )
 	
 end
 
-function love.keyboard.keypressed( key, scancode, isTouch )
+function love.keypressed( key, scancode, isTouch )
+	if scancode == "space" then
+		entdata.spawnEnt( game.ents[ 0 ], player.pos.x + 15, player.pos.y - 10, 0, 0 )
+	end
+	
 	if scancode == "escape" then
 		
 	end
