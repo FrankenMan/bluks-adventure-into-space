@@ -26,32 +26,9 @@ function entdata.EntGraphics()
 end
 
 function entdata.Register( id, name, sname, graphic, etype, colour, health, damage )
-	local bd = {
-		id = id,
-		name = name,
-		sname = sname,
-		graphic = graphic,
-		etype = etype,
-		colour = colour,
-		health = health,
-		damage = damage
-	}
-	game.ents[ id ] = bd
-	return bd
 end
 
 function entdata.getRegisteredEnts( filter, filterby )
-	local returnEnts = {}
-	if filter == true then
-		for k, v in pairs( game.ents ) do
-			if v[ k ] == filter then
-				table.insert( returnEnts, v )
-			end
-		end
-	else
-		return game.ents
-	end
-	return returnEnts
 end
 
 function entdata.spawnEnt( enttable, x, y, health )
