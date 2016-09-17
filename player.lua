@@ -7,8 +7,8 @@ player.health = 100
 player.falling = false
 player.jumping = false
 player.pos = {
-	x = 120,
-	y = 120
+	x = 90,
+	y = height - 250
 }
 player.inv = {}
 
@@ -21,9 +21,6 @@ function player.PlayerGraphics()
 	player.graphic = nPlr
 end
 
-function player.Physics()
-end
-
 function player.Control()
 	if love.keyboard.isDown( "a" ) then
 		player.MoveLeft()
@@ -32,13 +29,16 @@ function player.Control()
 	if love.keyboard.isDown( "d" ) then
 		player.MoveRight()
 	end
-	
-	if love.keyboard.isDown( "space" ) then
-		player.Jump()
-	end
 end
 
 function player.MoveLeft()
+	local cMove = true
+	if player.pos[ "x" ] == width - 30 then
+		cMove = false
+	end
+	if cMove then
+		player.pos[ "x" ] = player.pos[ "x" ] - 5
+	end
 end
 
 function player.MoveRight()
@@ -47,17 +47,7 @@ function player.MoveRight()
 		cMove = false
 	end
 	if cMove then
-		player.pos[ "x" ] = player.pos[ "x" ] + 4
-	end
-end
-
-function player.Jump()
-	if player.falling == false then
-		for i = 9, 0, -0.025 do
-			player.pos[ "y" ] = player.pos[ "y" ] - 0.15
-			player.jumping = true
-		end
-		player.jumping = false
+		player.pos[ "x" ] = player.pos[ "x" ] + 5
 	end
 end
 

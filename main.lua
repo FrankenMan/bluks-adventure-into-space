@@ -16,16 +16,15 @@ end
 function love.update()
 	width, height = bgui.Dimensions()
 	mousex, mousey = game.mousePos()
-	player.Physics()
 	player.Control()
-	ents.Physics()
 end
 
 function love.draw()
 	love.graphics.push()
 	love.graphics.rotate( 0 )
 	love.graphics.scale( 1.25 )
-	love.graphics.translate( ( width - player.pos[ "x" ] ) - ( 475 / 0.85 ), -50 )
+	--love.graphics.translate( ( width - player.pos[ "x" ] ) - ( 475 / 0.85 ), -50 )
+	player.Draw()
 	ents.Draw()
 	love.graphics.pop()
 	player.HUD()

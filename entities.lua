@@ -1,5 +1,4 @@
 --[[
-	Non-Boss entities should be 40x40.
 	!!! ENTDATA FORMAT !!!
 		ENT ID
 		ENT NAME
@@ -16,7 +15,7 @@
 		ENT POS[ X, Y ]
 		ENT HEALTH
 	!!! WORLDENT FORMAT !!!
---]]
+--]] -- no idea
 game.ents = {}
 entdata = {}
 ents = {}
@@ -38,7 +37,4 @@ function ents.Spawn( style )
 end
 
 function ents.Draw( style )
-end
-
-function ents.Physics()
 end
