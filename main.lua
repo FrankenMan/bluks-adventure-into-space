@@ -1,7 +1,5 @@
 -- Libraries --
 BScr = require "/lib/BScrMain"  -- BScr Library --
-UI = require "/lib/thranduil/ui" -- Thranduil UI Library --
-Theme = require "/lib/thranduil/TestTheme" -- Thranduil Theme --
 -- Files --
 playerfile = require "player" 
 entityfile = require "entities"
