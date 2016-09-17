@@ -18,6 +18,7 @@
 --]] -- no idea
 game.ents = {}
 activeEnts = {}
+activeEntCount = 0
 entdata = {}
 ents = {}
 
@@ -25,7 +26,7 @@ function entdata.EntGraphics()
 	entBluk0 = bgui.Image( "graphics/entBluk0.png" )
 end
 
-function entdata.Register( id, name, sname, graphic, etype, colour, health, damage, think )
+function entdata.Register( id, name, sname, graphic, etype, colour, health, damage, spawn, think, kill )
 	local t = {
 		id = id,
 		name = name,
@@ -35,7 +36,9 @@ function entdata.Register( id, name, sname, graphic, etype, colour, health, dama
 		collour = colour,
 		health = health,
 		damage = damage,
-		think = think
+		spawn = spawn,
+		think = think,
+		kill = kill
 	}
 	game.ents[ id ] = t
 	return t
@@ -48,7 +51,9 @@ function entdata.spawnEnt( enttable, x, y, health, uid )
 		pos = { x = x, y = y },
 		health = health
 	}
+	t.et.spawn( uid, t )
 	activeEnts[ uid ] = t
+	activeEntCount = activeEntCount + 1
 	print( "Spawned " .. enttable.name .. " at " .. x .. ", " .. y )
 	return t
 end
@@ -64,6 +69,6 @@ end
 
 function ents.Think()
 	for i, t in pairs( activeEnts ) do
-		t.et.think( t )
+		t.et.think( i, t )
 	end
 end

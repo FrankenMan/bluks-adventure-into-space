@@ -12,9 +12,18 @@ function love.load()
 	square10 = bgui.Image( "graphics/square10.png" )
 	square20 = bgui.Image( "graphics/square20.png" )
 	square30 = bgui.Image( "graphics/square30.png" )
-	entdata.Register( 0, "plrWpB0", "Bullet", square10, "wep", { 255, 255, 255 }, 0, 0, function( self )
+	entdata.Register( 0, "plrWpB0", "Bullet", square10, "wep", { 255, 255, 255 }, 0, 0,
+	function( i, self ) -- Spawn
+	end,
+	function( i, self ) -- Think
 		self.pos.y = self.pos.y - 1.5
-	end	)
+		if self.pos.y < 0 then
+			self.et.kill( i, self )
+		end
+	end,
+	function( i, self ) -- Kill
+		activeEnts[ i ] = nil
+	end )
 end
 
 function love.update()
@@ -40,7 +49,7 @@ end
 
 function love.keypressed( key, scancode, isTouch )
 	if scancode == "space" then
-		entdata.spawnEnt( game.ents[ 0 ], player.pos.x + 15, player.pos.y - 10, 0, 0 )
+		entdata.spawnEnt( game.ents[ 0 ], player.pos.x + 15, player.pos.y - 10, 0, activeEntCount + 1 )
 	end
 	
 	if scancode == "escape" then
