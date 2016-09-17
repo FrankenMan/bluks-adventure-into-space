@@ -12,13 +12,21 @@ function love.load()
 	square10 = bgui.Image( "graphics/square10.png" )
 	square20 = bgui.Image( "graphics/square20.png" )
 	square30 = bgui.Image( "graphics/square30.png" )
+	
+	-- Bullet
 	entdata.Register( 0, "plrWpB0", "Bullet", square10, "wep", { 255, 255, 255 }, 0, 0,
-	function( s )
-	end,
+	function( s ) -- Spawn Gen
+	return false end,
 	function( i, self ) -- Spawn
 	end,
 	function( i, self ) -- Think
 		self.pos.y = self.pos.y - 1.5
+		for li, t in pairs( activeEnts ) do
+			if t.et.etype == "enm" and math.Between( self.pos.x, t.pos.x, t.pos.x + t.et.graphic:getWidth() ) and math.Between( self.pos.y, t.pos.y, t.pos.y + t.et.graphic:getHeight() ) then
+				t.et.kill( li, t )
+				self.et.kill( i, self )
+			end
+		end
 		if self.pos.y < 0 then
 			self.et.kill( i, self )
 		end
@@ -26,8 +34,13 @@ function love.load()
 	function( i, self ) -- Kill
 		activeEnts[ i ] = nil
 	end )
+	
+	-- Weak Enemy 1
 	entdata.Register( 1, "wEnem1", "Enemy", square20, "enm", { 255, 0, 0 }, 10, 0,
-	function( s )
+	function( i ) -- Spawn Gen
+		for w = width, 0, -50 do
+			entdata.spawnEnt( game.ents[ i ], w, 90, 10, activeEntCount + 1 )
+		end
 	end,
 	function( i, self ) -- Spawn
 	end,
@@ -36,6 +49,9 @@ function love.load()
 	function( i, self ) -- Kill
 		activeEnts[ i ] = nil
 	end )
+	for i, t in pairs( game.ents ) do
+		t.genEnt( i )
+	end
 end
 
 function love.update()
