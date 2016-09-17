@@ -4,11 +4,11 @@ function love.errhand( msg )
 	love.window.showMessageBox( "Uh oh, we ran into an error!", tostring( msg ), { "Exit" } )
 end
 
-game = { "BlockGame", "1-2-5" }
+game = { "BlockGame", "BlukSpace" }
 
 function love.conf( conf )
 	conf.window.title = "BlockGame " .. game[ 2 ]
-	conf.identity = "Arch/BlockGame"
+	conf.identity = "Arch/" .. game[ 2 ]
 	conf.console = true
 	conf.window.width = 900
 	conf.window.vsync = true
