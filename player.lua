@@ -6,6 +6,7 @@ player.graphic = false
 player.health = 100
 player.falling = false
 player.jumping = false
+player.lives = 3
 player.pos = {
 	x = 90,
 	y = height - 250
@@ -37,7 +38,7 @@ function player.MoveLeft()
 		cMove = false
 	end
 	if cMove then
-		player.pos[ "x" ] = player.pos[ "x" ] - 5
+		player.pos[ "x" ] = player.pos[ "x" ] - 2.5
 	end
 end
 
@@ -47,12 +48,13 @@ function player.MoveRight()
 		cMove = false
 	end
 	if cMove then
-		player.pos[ "x" ] = player.pos[ "x" ] + 5
+		player.pos[ "x" ] = player.pos[ "x" ] + 2.5
 	end
 end
 
 function player.HUD()
-	bgui.text( "Health: " .. player.health, 10, height - 30, "font/VarelaRound.ttf", 25, { 255, 255, 255, 255 }, "left" )
+	bgui.text( "LEVEL: " .. game.level, 5, height - 70, "font/3Dventure.ttf", 35, { 255, 255, 255, 255 }, "left" )
+	bgui.text( "LIVES: " .. player.lives, 5, height - 35, "font/3Dventure.ttf", 35, { 255, 255, 255, 255 }, "left" )
 	bgui.text( "MouseX - " .. mousex, 0, 0, "font/Merriweather.ttf", 10, { 255, 255, 255, 255 }, "left" )
 	bgui.text( "MouseY - " .. mousey, 0, 15, "font/Merriweather.ttf", 10, { 255, 255, 255, 255 }, "left" )
 	bgui.text( "PlayerX - " .. player.pos[ "x" ], 0, 30, "font/Merriweather.ttf", 10, { 255, 255, 255, 255 }, "left" )

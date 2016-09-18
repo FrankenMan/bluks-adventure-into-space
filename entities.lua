@@ -33,7 +33,7 @@ function entdata.Register( id, name, sname, graphic, etype, colour, health, dama
 		sname = sname,
 		graphic = graphic,
 		etype = etype,
-		collour = colour,
+		colour = colour,
 		health = health,
 		damage = damage,
 		genEnt = genEnt,
@@ -64,7 +64,7 @@ end
 
 function ents.Draw( style )
 	for i, t in pairs( activeEnts ) do
-		bgui.img( t.et.graphic, t.pos.x, t.pos.y, { 255, 255, 255 } )
+		bgui.img( t.et.graphic, t.pos.x, t.pos.y, t.et.colour )
 	end
 end
 

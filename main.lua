@@ -13,6 +13,10 @@ function love.load()
 	square20 = bgui.Image( "graphics/square20.png" )
 	square30 = bgui.Image( "graphics/square30.png" )
 	
+	
+	game.level = 1
+	player.lives = 3
+	
 	-- Bullet
 	entdata.Register( 0, "plrWpB0", "Bullet", square10, "wep", { 255, 255, 255 }, 0, 0,
 	function( s ) -- Spawn Gen
@@ -20,7 +24,7 @@ function love.load()
 	function( i, self ) -- Spawn
 	end,
 	function( i, self ) -- Think
-		self.pos.y = self.pos.y - 1.5
+		self.pos.y = self.pos.y - 2.5
 		for li, t in pairs( activeEnts ) do
 			if t.et.etype == "enm" and math.Between( self.pos.x, t.pos.x, t.pos.x + t.et.graphic:getWidth() ) and math.Between( self.pos.y, t.pos.y, t.pos.y + t.et.graphic:getHeight() ) then
 				t.et.kill( li, t )
@@ -35,11 +39,83 @@ function love.load()
 		activeEnts[ i ] = nil
 	end )
 	
-	-- Weak Enemy 1
-	entdata.Register( 1, "wEnem1", "Enemy", square20, "enm", { 255, 0, 0 }, 10, 0,
+	-- Enemy 1
+	entdata.Register( 1, "Enem1", "Enemy", square10, "enm", { 155, 155, 155 }, 10, 0,
+	function( i ) -- Spawn Gen
+		for w = width, 0, -20 do
+			entdata.spawnEnt( game.ents[ i ], w, 150, 10, activeEntCount + 1 )
+		end
+	end,
+	function( i, self ) -- Spawn
+	end,
+	function( i, self ) -- Think
+	end,
+	function( i, self ) -- Kill
+		activeEnts[ i ] = nil
+	end )
+	for i, t in pairs( game.ents ) do
+		t.genEnt( i )
+	end
+	
+	-- Enemy 2
+	entdata.Register( 1, "Enem2", "Enemy", square20, "enm", { 100, 155, 155 }, 10, 0,
+	function( i ) -- Spawn Gen
+		for w = width, 0, -50 do
+			entdata.spawnEnt( game.ents[ i ], w, 120, 10, activeEntCount + 1 )
+		end
+	end,
+	function( i, self ) -- Spawn
+	end,
+	function( i, self ) -- Think
+	end,
+	function( i, self ) -- Kill
+		activeEnts[ i ] = nil
+	end )
+	for i, t in pairs( game.ents ) do
+		t.genEnt( i )
+	end
+	
+	-- Enemy 3
+	entdata.Register( 3, "Enem3", "Enemy", square20, "enm", { 150, 105, 105 }, 10, 0,
 	function( i ) -- Spawn Gen
 		for w = width, 0, -50 do
 			entdata.spawnEnt( game.ents[ i ], w, 90, 10, activeEntCount + 1 )
+		end
+	end,
+	function( i, self ) -- Spawn
+	end,
+	function( i, self ) -- Think
+	end,
+	function( i, self ) -- Kill
+		activeEnts[ i ] = nil
+	end )
+	for i, t in pairs( game.ents ) do
+		t.genEnt( i )
+	end
+	
+	-- Enemy 4
+	entdata.Register( 4, "Enem4", "Enemy", square20, "enm", { 255, 0, 0 }, 10, 0,
+	function( i ) -- Spawn Gen
+		for w = width, 0, -50 do
+			entdata.spawnEnt( game.ents[ i ], w, 60, 10, activeEntCount + 1 )
+		end
+	end,
+	function( i, self ) -- Spawn
+	end,
+	function( i, self ) -- Think
+	end,
+	function( i, self ) -- Kill
+		activeEnts[ i ] = nil
+	end )
+	for i, t in pairs( game.ents ) do
+		t.genEnt( i )
+	end
+	
+	-- Enemy 5
+	entdata.Register( 5, "Enem5", "Enemy", square30, "enm", { 255, 0, 0 }, 10, 0,
+	function( i ) -- Spawn Gen
+		for w = width, 0, -80 do
+			entdata.spawnEnt( game.ents[ i ], w, 20, 10, activeEntCount + 1 )
 		end
 	end,
 	function( i, self ) -- Spawn
@@ -83,6 +159,10 @@ function love.keypressed( key, scancode, isTouch )
 	if scancode == "escape" then
 		
 	end
+end
+
+function EntGen( ent, level )
+	--if math.Between( level, 1, 5 ) and 
 end
 
 -- BScrLib Functions -- CreateData -- SaveData -- LoadData --
