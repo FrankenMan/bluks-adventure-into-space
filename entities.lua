@@ -95,24 +95,6 @@
              `.`                                                                                                                            
 
 --]]
---[[
-	!!! ENTDATA FORMAT !!!
-		ENT ID
-		ENT NAME
-		ENT SIMPLENAME
-		ENT GRAPHIC
-		ENT TYPE
-		ENT COLOUR
-		ENT HEALTH
-		ENT DAMAGE
-	!!! ENTDATA FORMAT !!!
-	!!! WORLDENT FORMAT !!!
-		ENT UNIQUE ID
-		ENT TABLE
-		ENT POS[ X, Y ]
-		ENT HEALTH
-	!!! WORLDENT FORMAT !!!
---]] -- no idea
 game.ents = {}
 activeEnts = {}
 activeEntCount = 0
